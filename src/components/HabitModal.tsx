@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { X, Trash2 } from 'lucide-react';
-import type { Habit, HabitCategory, HabitFrequency, HabitColor } from '../types';
-import { CATEGORIES, FREQUENCIES, AVAILABLE_ICONS, AVAILABLE_COLORS } from '../constants';
+import { X, Plus } from 'lucide-react';
+import type { Habit, HabitCategory, HabitFrequency } from '../types';
+import { CATEGORIES, FREQUENCIES, AVAILABLE_ICONS } from '../constants';
 import { HabitIcon } from './HabitIcon';
 
 interface HabitModalProps {
@@ -25,8 +25,7 @@ export const HabitModal: React.FC<HabitModalProps> = ({
   const [target, setTarget] = useState('');
   const [category, setCategory] = useState<HabitCategory>('wellbeing');
   const [frequency, setFrequency] = useState<HabitFrequency>('daily');
-  const [icon, setIcon] = useState('droplet');
-  const [color, setColor] = useState<HabitColor>('blue');
+  const [icon, setIcon] = useState('leaf');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -37,14 +36,12 @@ export const HabitModal: React.FC<HabitModalProps> = ({
         setCategory(habitToEdit.category);
         setFrequency(habitToEdit.frequency);
         setIcon(habitToEdit.icon);
-        setColor(habitToEdit.color);
       } else {
         setName('');
         setTarget('');
         setCategory('wellbeing');
         setFrequency('daily');
-        setIcon('target');
-        setColor('blue');
+        setIcon('leaf');
       }
       setError(null);
     }
@@ -74,12 +71,9 @@ export const HabitModal: React.FC<HabitModalProps> = ({
       category,
       frequency,
       icon,
-      color,
     });
     onClose();
   };
-
-  const selectedColorMeta = AVAILABLE_COLORS.find((c) => c.id === color) || AVAILABLE_COLORS[0];
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
@@ -92,8 +86,7 @@ export const HabitModal: React.FC<HabitModalProps> = ({
       >
         <div className="modal-heading">
           <div>
-            <h2 id="habit-modal-title">{isEditing ? 'Edit habit' : 'Your new habit'}</h2>
-            <p>Set a small, specific daily goal to build lasting habits.</p>
+            <h2 id="habit-modal-title">{isEditing ? 'Edit habit' : 'Add habit'}</h2>
           </div>
           <button
             type="button"
@@ -101,30 +94,26 @@ export const HabitModal: React.FC<HabitModalProps> = ({
             onClick={onClose}
             aria-label="Close dialog"
           >
-            <X size={16} />
+            <X size={18} />
           </button>
         </div>
 
+        {/* Live habit preview matching reference */}
         <div className="editor-preview">
-          <div
-            className="habit-icon"
-            style={{
-              color: selectedColorMeta.hex,
-              borderColor: selectedColorMeta.hex,
-            }}
-          >
-            <HabitIcon name={icon} size={20} />
+          <div className="habit-icon">
+            <HabitIcon name={icon} size={22} />
           </div>
           <div>
-            <strong>{name || 'New habit'}</strong>
-            <span>{target || 'Set a small goal'}</span>
+            <strong>{name.trim() || 'Your new habit'}</strong>
+            <span>{target.trim() || 'Set a small, specific goal'}</span>
           </div>
         </div>
 
         <form onSubmit={handleSubmit}>
+          {/* Name Field */}
           <label className="form-field">
             Habit name
-            <span>Required ({name.length}/24)</span>
+            <span>Required</span>
             <input
               type="text"
               value={name}
@@ -139,9 +128,9 @@ export const HabitModal: React.FC<HabitModalProps> = ({
             />
           </label>
 
+          {/* Small Goal Field */}
           <label className="form-field">
             Set a small goal
-            <span>Optional ({target.length}/40)</span>
             <input
               type="text"
               value={target}
@@ -151,6 +140,7 @@ export const HabitModal: React.FC<HabitModalProps> = ({
             />
           </label>
 
+          {/* Two Columns: Category & Repeat */}
           <div className="form-columns">
             <label className="form-field">
               Category
@@ -181,6 +171,7 @@ export const HabitModal: React.FC<HabitModalProps> = ({
             </label>
           </div>
 
+          {/* Icon Picker (12 reference icons, no colors) */}
           <fieldset className="icon-picker">
             <legend>Choose an icon</legend>
             {AVAILABLE_ICONS.map((item) => (
@@ -192,63 +183,41 @@ export const HabitModal: React.FC<HabitModalProps> = ({
                 title={item.label}
                 aria-label={item.label}
               >
-                <HabitIcon name={item.id} size={16} />
+                <HabitIcon name={item.id} size={18} />
               </button>
             ))}
           </fieldset>
 
-          <div style={{ marginTop: '18px' }}>
-            <span style={{ fontSize: '11px', color: 'var(--surface-muted)', display: 'block', marginBottom: '8px' }}>
-              Accent color
-            </span>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {AVAILABLE_COLORS.map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => setColor(c.id)}
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: '50%',
-                    backgroundColor: c.hex,
-                    border: color === c.id ? '2px solid var(--surface-text)' : '2px solid transparent',
-                    outlineOffset: '2px',
-                    transition: 'transform 0.15s ease',
-                    transform: color === c.id ? 'scale(1.15)' : 'scale(1)',
-                  }}
-                  title={c.label}
-                  aria-label={c.label}
-                />
-              ))}
-            </div>
-          </div>
+          {isEditing && (
+            <p className="form-hint" style={{ marginTop: '16px' }}>
+              Changing the schedule keeps your existing check-ins.
+            </p>
+          )}
 
           {error && <div className="form-error">{error}</div>}
 
+          {/* Actions */}
           <div className="modal-actions">
-            <div>
-              {isEditing && habitToEdit && onRequestDelete && (
-                <button
-                  type="button"
-                  className="danger"
-                  onClick={() => onRequestDelete(habitToEdit)}
-                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
-                >
-                  <Trash2 size={13} />
-                  <span>Delete habit</span>
-                </button>
-              )}
-            </div>
+            {isEditing && habitToEdit && onRequestDelete ? (
+              <button
+                type="button"
+                className="text-button danger"
+                onClick={() => onRequestDelete(habitToEdit)}
+              >
+                Delete habit
+              </button>
+            ) : (
+              <span className="form-hint" />
+            )}
 
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button type="button" className="button secondary" onClick={onClose}>
-                Cancel
-              </button>
-              <button type="submit" className="button primary">
-                {isEditing ? 'Save changes' : 'Create habit'}
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="button primary"
+              disabled={!name.trim()}
+            >
+              {!isEditing && <Plus size={14} style={{ marginRight: 2 }} />}
+              <span>{isEditing ? 'Save changes' : 'Add habit'}</span>
+            </button>
           </div>
         </form>
       </div>

@@ -31,7 +31,6 @@ import { DeleteConfirmModal } from './components/DeleteConfirmModal';
 import { MonthPickerModal } from './components/MonthPickerModal';
 import { BackgroundPickerModal } from './components/BackgroundPickerModal';
 import { Toast } from './components/Toast';
-import { CheckCircle2, X } from 'lucide-react';
 
 export function App() {
   const [habits, setHabits] = useState<Habit[]>(loadStoredHabits);
@@ -205,8 +204,7 @@ export function App() {
         target: habitData.target,
         category: habitData.category || 'wellbeing',
         frequency: habitData.frequency || 'daily',
-        icon: habitData.icon || 'target',
-        color: habitData.color || 'blue',
+        icon: habitData.icon || 'leaf',
         createdAt: new Date().toISOString(),
         order: habits.length,
       };
@@ -351,22 +349,9 @@ export function App() {
       />
 
       <main className="sheet" id="main-content">
-        {settings.showNotice && (
-          <aside className="demo-notice" aria-label="Storage status banner">
-            <span className="demo-notice-text">
-              <CheckCircle2 size={13} style={{ color: '#22c55e', flexShrink: 0 }} />
-              Local storage active — your check-ins and habits are safely stored on this device.
-            </span>
-            <button
-              type="button"
-              className="demo-notice-close"
-              onClick={() => updateSettings({ ...settings, showNotice: false })}
-              aria-label="Dismiss banner"
-            >
-              <X size={13} />
-            </button>
-          </aside>
-        )}
+        <div className="demo-notice">
+          Demo template — your changes won't be saved. Ask Kimi to build your own copy with fullstack enabled.
+        </div>
 
         <SheetToolbar
           view={settings.view}
@@ -380,7 +365,7 @@ export function App() {
           resolvedTheme={resolvedTheme}
           onToggleTheme={handleToggleTheme}
           onSetAppearance={handleSetAppearance}
-          showStats={settings.showStats}
+          showStats={Boolean(settings.showStats)}
           onToggleStats={handleToggleStats}
           onOpenBackgroundPicker={() => setIsBgPickerOpen(true)}
           onExportCSV={handleExportCSV}

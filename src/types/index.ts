@@ -2,21 +2,18 @@ export type AppearanceMode = 'light' | 'dark' | 'system';
 
 export type ViewMode = 'week' | 'fortnight' | 'month';
 
-export type HabitCategory = 'wellbeing' | 'growth' | 'lifestyle' | 'productivity' | 'health';
+export type HabitCategory = 'wellbeing' | 'growth' | 'lifestyle';
 
 export type HabitFrequency = 'daily' | 'weekdays' | 'weekends';
-
-export type HabitColor = 'blue' | 'purple' | 'orange' | 'green' | 'teal' | 'rose' | 'amber' | 'indigo';
 
 export interface Habit {
   id: string;
   name: string;
   target?: string;
   icon: string;
-  color: HabitColor;
   category: HabitCategory;
   frequency: HabitFrequency;
-  createdAt: string; // ISO date string
+  createdAt: string;
   order?: number;
 }
 
@@ -38,8 +35,8 @@ export interface TrackerSettings {
   };
   customBackgroundUrl?: string;
   view: ViewMode;
-  showStats: boolean;
-  showNotice: boolean;
+  showNotice?: boolean;
+  showStats?: boolean;
 }
 
 export interface HabitStats {

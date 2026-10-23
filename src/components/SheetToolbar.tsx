@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Sun, Moon, MoreHorizontal, BarChart2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sun, Moon, MoreHorizontal } from 'lucide-react';
 import type { ViewMode, AppearanceMode } from '../types';
 import { OptionsMenu } from './OptionsMenu';
 
@@ -115,16 +115,6 @@ export const SheetToolbar: React.FC<SheetToolbarProps> = ({
       </div>
 
       <div className="toolbar-end">
-        <button
-          type="button"
-          className={`icon-button ${showStats ? 'active-icon' : ''}`}
-          onClick={onToggleStats}
-          aria-label={showStats ? 'Hide statistics' : 'Show statistics'}
-          title="Habit statistics overview"
-        >
-          <BarChart2 size={16} />
-        </button>
-
         <button
           type="button"
           className="icon-button appearance-toggle"

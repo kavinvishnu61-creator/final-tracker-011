@@ -1,4 +1,4 @@
-import type { BackgroundPreset, Habit, HabitCategory, HabitFrequency, HabitColor } from '../types';
+import type { BackgroundPreset, Habit, HabitCategory, HabitFrequency } from '../types';
 
 export const LIGHT_BACKGROUNDS: BackgroundPreset[] = [
   {
@@ -52,8 +52,6 @@ export const CATEGORIES: { id: HabitCategory; label: string }[] = [
   { id: 'wellbeing', label: 'Wellbeing' },
   { id: 'growth', label: 'Personal growth' },
   { id: 'lifestyle', label: 'Lifestyle' },
-  { id: 'productivity', label: 'Productivity' },
-  { id: 'health', label: 'Health & Fitness' },
 ];
 
 export const FREQUENCIES: { id: HabitFrequency; label: string }[] = [
@@ -67,29 +65,14 @@ export const AVAILABLE_ICONS = [
   { id: 'book', label: 'Reading' },
   { id: 'dumbbell', label: 'Exercise' },
   { id: 'flower', label: 'Meditation' },
-  { id: 'sun', label: 'Sun / Rise' },
-  { id: 'moon', label: 'Moon / Sleep' },
+  { id: 'sun', label: 'Sun' },
+  { id: 'moon', label: 'Moon' },
   { id: 'footprints', label: 'Walking' },
-  { id: 'leaf', label: 'Nutrition' },
-  { id: 'heart', label: 'Gratitude' },
+  { id: 'leaf', label: 'Leaf' },
+  { id: 'heart', label: 'Heart' },
   { id: 'pencil', label: 'Writing' },
   { id: 'coffee', label: 'Coffee' },
   { id: 'music', label: 'Music' },
-  { id: 'bike', label: 'Cycling' },
-  { id: 'flame', label: 'Focus' },
-  { id: 'zap', label: 'Energy' },
-  { id: 'target', label: 'Goal' },
-];
-
-export const AVAILABLE_COLORS: { id: HabitColor; label: string; hex: string; lightBg: string; darkBg: string }[] = [
-  { id: 'blue', label: 'Blue', hex: '#3b82f6', lightBg: 'rgba(59, 130, 246, 0.12)', darkBg: 'rgba(59, 130, 246, 0.25)' },
-  { id: 'purple', label: 'Purple', hex: '#a855f7', lightBg: 'rgba(168, 85, 247, 0.12)', darkBg: 'rgba(168, 85, 247, 0.25)' },
-  { id: 'orange', label: 'Orange', hex: '#f97316', lightBg: 'rgba(249, 115, 22, 0.12)', darkBg: 'rgba(249, 115, 22, 0.25)' },
-  { id: 'green', label: 'Green', hex: '#22c55e', lightBg: 'rgba(34, 197, 94, 0.12)', darkBg: 'rgba(34, 197, 94, 0.25)' },
-  { id: 'teal', label: 'Teal', hex: '#14b8a6', lightBg: 'rgba(20, 184, 166, 0.12)', darkBg: 'rgba(20, 184, 166, 0.25)' },
-  { id: 'rose', label: 'Rose', hex: '#f43f5e', lightBg: 'rgba(244, 63, 94, 0.12)', darkBg: 'rgba(244, 63, 94, 0.25)' },
-  { id: 'amber', label: 'Amber', hex: '#f59e0b', lightBg: 'rgba(245, 158, 11, 0.12)', darkBg: 'rgba(245, 158, 11, 0.25)' },
-  { id: 'indigo', label: 'Indigo', hex: '#6366f1', lightBg: 'rgba(99, 102, 241, 0.12)', darkBg: 'rgba(99, 102, 241, 0.25)' },
 ];
 
 export const DEFAULT_HABITS: Habit[] = [
@@ -98,7 +81,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Water',
     target: 'Drink 8 glasses of water',
     icon: 'droplet',
-    color: 'blue',
     category: 'wellbeing',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -109,7 +91,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Read',
     target: 'Read for 20 minutes',
     icon: 'book',
-    color: 'purple',
     category: 'growth',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -120,7 +101,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Move',
     target: 'Move for 30 minutes',
     icon: 'dumbbell',
-    color: 'orange',
     category: 'wellbeing',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -131,7 +111,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Pause',
     target: 'Meditate for 10 minutes',
     icon: 'flower',
-    color: 'green',
     category: 'wellbeing',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -142,7 +121,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Rise',
     target: 'Wake up by 7:00 a.m.',
     icon: 'sun',
-    color: 'orange',
     category: 'lifestyle',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -153,7 +131,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Eat',
     target: 'Enjoy a serving of fruit and vegetables',
     icon: 'leaf',
-    color: 'teal',
     category: 'lifestyle',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -164,7 +141,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Thanks',
     target: 'Write down one thing you appreciate',
     icon: 'heart',
-    color: 'rose',
     category: 'growth',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
@@ -175,7 +151,6 @@ export const DEFAULT_HABITS: Habit[] = [
     name: 'Sleep',
     target: 'Put your phone away by 11:00 p.m.',
     icon: 'moon',
-    color: 'purple',
     category: 'lifestyle',
     frequency: 'daily',
     createdAt: new Date().toISOString(),
