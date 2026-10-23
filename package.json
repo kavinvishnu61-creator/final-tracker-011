@@ -32,6 +32,7 @@
     "electron": "^45.0.0",
     "electron-builder": "^26.15.3",
     "oxlint": "^1.88.0",
+    "png-to-ico": "^3.0.2",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
     "vite": "^8.3.4"
@@ -48,6 +49,7 @@
       "package.json"
     ],
     "win": {
+      "icon": "public/icon.ico",
       "target": [
         "nsis",
         "portable"
