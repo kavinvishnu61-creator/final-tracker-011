@@ -2,7 +2,7 @@ import React from 'react';
 import { Plus, Check, Sparkles } from 'lucide-react';
 import type { Habit, CheckInMap, ViewMode } from '../types';
 import { HabitIcon } from './HabitIcon';
-import { formatDateKey, isToday, isFutureDate, isDateScheduled, getWeekdayAbbr } from '../utils/date';
+import { formatDateKey, isToday, isDateScheduled, getWeekdayAbbr } from '../utils/date';
 
 interface HabitTableProps {
   habits: Habit[];
@@ -92,7 +92,6 @@ export const HabitTable: React.FC<HabitTableProps> = ({
                 {days.map((date) => {
                   const dateKey = formatDateKey(date);
                   const isScheduled = isDateScheduled(date, habit.frequency);
-                  const isFuture = isFutureDate(date);
                   const isChecked = !!checkIns[`${habit.id}:${dateKey}`];
 
                   if (!isScheduled) {
@@ -113,7 +112,7 @@ export const HabitTable: React.FC<HabitTableProps> = ({
                     <td key={dateKey}>
                       <button
                         type="button"
-                        className={`check-cell ${isChecked ? 'completed' : ''} ${isFuture ? 'future' : ''}`}
+                        className={`check-cell ${isChecked ? 'completed' : ''}`}
                         onClick={() => onToggleCheckIn(habit.id, date)}
                         title={`${habit.name}: ${dateKey} — ${isChecked ? 'Completed (click to undo)' : 'Click to check in'}`}
                         aria-label={`${habit.name}, ${dateKey}, ${isChecked ? 'Complete' : 'Incomplete'}`}

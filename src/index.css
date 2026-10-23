@@ -573,10 +573,6 @@ body {
   transform: scale(0.92);
 }
 
-.check-cell.future {
-  opacity: 0.4;
-}
-
 .rest-dash {
   height: 1px;
   width: 7px;
