@@ -1,24 +1,32 @@
 import type { BackgroundPreset, Habit, HabitCategory, HabitFrequency } from '../types';
 
+export function normalizeImageUrl(url?: string): string {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  return `./${url.replace(/^\/+/, '')}`;
+}
+
 export const LIGHT_BACKGROUNDS: BackgroundPreset[] = [
   {
     id: 'lone-tree',
     name: 'Lone Tree',
-    src: '/backgrounds/portfolio-mountain-07.webp',
+    src: './backgrounds/portfolio-mountain-07.webp',
     position: '6% 50%',
     mode: 'light',
   },
   {
     id: 'winter-river',
     name: 'Winter River',
-    src: '/backgrounds/portfolio-mountain-11.webp',
+    src: './backgrounds/portfolio-mountain-11.webp',
     position: '50% 50%',
     mode: 'light',
   },
   {
     id: 'above-the-clouds',
     name: 'Above the Clouds',
-    src: '/backgrounds/portfolio-mountain-01.webp',
+    src: './backgrounds/portfolio-mountain-01.webp',
     position: '50% 50%',
     mode: 'light',
   },
@@ -28,21 +36,21 @@ export const DARK_BACKGROUNDS: BackgroundPreset[] = [
   {
     id: 'starlit-peak',
     name: 'Starlit Peak',
-    src: '/backgrounds/portfolio-mountain-04.webp',
+    src: './backgrounds/portfolio-mountain-04.webp',
     position: '60% 50%',
     mode: 'dark',
   },
   {
     id: 'blue-hour-ridge',
     name: 'Blue Hour Ridge',
-    src: '/backgrounds/portfolio-mountain-02.webp',
+    src: './backgrounds/portfolio-mountain-02.webp',
     position: '50% 50%',
     mode: 'dark',
   },
   {
     id: 'blue-coast',
     name: 'Blue Coast',
-    src: '/backgrounds/portfolio-coast-08.webp',
+    src: './backgrounds/portfolio-coast-08.webp',
     position: '50% 50%',
     mode: 'dark',
   },

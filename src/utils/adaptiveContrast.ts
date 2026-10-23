@@ -15,7 +15,9 @@ export function runAdaptiveContrast(
 
   let isCancelled = false;
   const img = new Image();
-  img.crossOrigin = 'anonymous';
+  if (imageSrc.startsWith('http://') || imageSrc.startsWith('https://')) {
+    img.crossOrigin = 'anonymous';
+  }
   img.src = imageSrc;
 
   img.onload = () => {

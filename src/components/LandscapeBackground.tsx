@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { LIGHT_BACKGROUNDS, DARK_BACKGROUNDS } from '../constants';
+import { LIGHT_BACKGROUNDS, DARK_BACKGROUNDS, normalizeImageUrl } from '../constants';
 import type { AppearanceMode } from '../types';
 
 interface LandscapeBackgroundProps {
@@ -21,7 +21,8 @@ export const LandscapeBackground: React.FC<LandscapeBackgroundProps> = ({
   const safeIndex = Math.max(0, Math.min(currentIndex, currentList.length - 1));
   const activePreset = currentList[safeIndex];
 
-  const activeSrc = customUrl || activePreset.src;
+  const rawSrc = customUrl || activePreset.src;
+  const activeSrc = normalizeImageUrl(rawSrc);
   const activePosition = customUrl ? 'center center' : activePreset.position;
 
   useEffect(() => {

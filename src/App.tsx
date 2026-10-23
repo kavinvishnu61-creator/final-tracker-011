@@ -7,7 +7,7 @@ import type {
   AppearanceMode,
   ToastMessage,
 } from './types';
-import { DEFAULT_HABITS, MONTH_NAMES, LIGHT_BACKGROUNDS, DARK_BACKGROUNDS } from './constants';
+import { DEFAULT_HABITS, MONTH_NAMES, LIGHT_BACKGROUNDS, DARK_BACKGROUNDS, normalizeImageUrl } from './constants';
 import {
   loadStoredHabits,
   saveStoredHabits,
@@ -147,7 +147,8 @@ export function App() {
     const currentList = resolvedTheme === 'dark' ? DARK_BACKGROUNDS : LIGHT_BACKGROUNDS;
     const currentIdx = resolvedTheme === 'dark' ? settings.backgroundIndex.dark : settings.backgroundIndex.light;
     const activePreset = currentList[currentIdx] || currentList[0];
-    const src = settings.customBackgroundUrl || activePreset.src;
+    const rawSrc = settings.customBackgroundUrl || activePreset.src;
+    const src = normalizeImageUrl(rawSrc);
     const pos = settings.customBackgroundUrl ? '50% 50%' : activePreset.position;
 
     const timer = setTimeout(() => {

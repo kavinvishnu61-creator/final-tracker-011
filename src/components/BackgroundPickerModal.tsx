@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Check, Link as LinkIcon } from 'lucide-react';
-import { LIGHT_BACKGROUNDS, DARK_BACKGROUNDS } from '../constants';
+import { LIGHT_BACKGROUNDS, DARK_BACKGROUNDS, normalizeImageUrl } from '../constants';
 
 interface BackgroundPickerModalProps {
   isOpen: boolean;
@@ -133,7 +133,7 @@ export const BackgroundPickerModal: React.FC<BackgroundPickerModalProps> = ({
                 }}
               >
                 <img
-                  src={preset.src}
+                  src={normalizeImageUrl(preset.src)}
                   alt={preset.name}
                   style={{
                     width: '100%',
